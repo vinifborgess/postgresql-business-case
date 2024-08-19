@@ -73,3 +73,8 @@ Caso esteja com o arquivo .pbix pronto, apenas edite as credenciaisi com as inst
 Na tabela fato (Movimentos), há erros de registro de datas quando tentamos mesclar os campos separados relacionados à data.
 
 
+## Step 6: Data Modeling 
+
+<img src="https://github.com/vinifborgess/postgresql-business-case/blob/main/imagem_2024-08-19_172345393.png"/>
+
+
