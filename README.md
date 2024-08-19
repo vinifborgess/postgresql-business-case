@@ -7,6 +7,7 @@ Business case using PostgreSQL, MS PowerBI w/ PowerQuery.
 Projeto de análise de dados que visa a restauração de um arquivo .sql usando 'Restore' do PostgreSQL, pelo método do Query Tool. Gerenciamento de dados utilizando PowerQuery conectando diretamente no servidor do PostgreSQL.
 Analytics final entregue usando MS PowerBi.
 
+<img src="https://github.com/vinifborgess/postgresql-business-case/blob/main/Data%20Architecture.jpg"/> 
 
 ## Instalação
 
