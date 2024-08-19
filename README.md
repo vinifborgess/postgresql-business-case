@@ -43,13 +43,13 @@ Vá à base de dados 'postgres' ou à alguma de sua preferência, clique com o b
 
 Com o botão F5, execute a consulta. Após a run, as tabelas do código (6) foram geradas com sucesso, de maneira lógica e segura, dentro de 'Schemas', na sua base de dados selecionada.
 
-As tabelas geradas foram:
-- x
-- y
-- n
-- l
-- m
-- z
+As tabelas geradas dentro da instância public, foram:
+- Movimentos (fato);
+- Cidade_Estado_País (dimensão);
+- Clientes (dimensão);
+- Itens (dimensão);
+- Metas_Prod (dimensão);
+- Representantes (dimensão);
 
 Para visualização e checagem, dentro de 'Schemas' -> public -> Tables -> verifique se as seis tabelas do código SQL foram geradas. Para melhor entendimento dos dados, com o botão direito, clique em View/Edit Data para visualizar o dataset.
 
@@ -59,8 +59,12 @@ O MS PowerBI, por sua vez, possui conexão integrada com o SGBD do projeto (Post
 
 Como o projeto está sendo executado em ambiente local, na aba de servidor, digite o seu localhost (localhost ou 127.0.0.1) e a base de dados onde as tabelas estão hospedadas.
 
+Para a maioria dos sistema, the default Postgres user is 'postgres' e a sua senha é a respectiva registrada no momento da instalação. Caso não saiba, clique aqui.
+
 ## Step 4: Importação e Data Management
 
-Importe todas as tabelas para o PowerQuery, ambiente de gerenciamento de dados nativo do MS PowerBI.
+Importe todas as tabelas para o PowerQuery, ambiente de gerenciamento de dados nativo do MS PowerBI e clique em Transformar Dados.
+
+Caso esteja com o arquivo .pbix pronto, apenas edite as credenciaisi com as instruições do Step 3.
 
 
