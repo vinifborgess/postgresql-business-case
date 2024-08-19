@@ -67,4 +67,8 @@ Importe todas as tabelas para o PowerQuery, ambiente de gerenciamento de dados n
 
 Caso esteja com o arquivo .pbix pronto, apenas edite as credenciaisi com as instruições do Step 3.
 
+## Step 5: Adjusting database errors
+
+Na tabela fato (Movimentos), há erros de registro de datas quando tentamos mesclar os campos separados relacionados à data.
+
 
