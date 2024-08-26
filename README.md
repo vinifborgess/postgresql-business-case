@@ -1,76 +1,75 @@
-# postgresql-business-case
-Business case using PostgreSQL, MS PowerBI w/ PowerQuery.
+# Postgres Business Case
+This project is a data analysis business case focused on addressing final business questions. It includes technical steps such as database restoration, modeling adaptation, and customized correction with automation to handle native database issues.
 
-
-## Introdução
-
-Projeto de análise de dados que visa a restauração de um arquivo .sql usando 'Restore' do PostgreSQL, pelo método do Query Tool. Gerenciamento de dados utilizando PowerQuery conectando diretamente no servidor do PostgreSQL.
-Analytics final entregue usando MS PowerBi.
+## Intro
+Data analysis project aimed at restoring a .sql file using the 'Restore' feature in PostgreSQL via the Query Tool method. Data management is done using PowerQuery, directly connected to the PostgreSQL server. Analytics - as final step -, are delivered using MS PowerBI.
 
 <img src="https://github.com/vinifborgess/postgresql-business-case/blob/main/Data%20Architecture.jpg"/> 
 
-## Instalação
+## Setup
 
-- Antes de iniciar, certifique-se que você possui o PostgreSQL instalado em sua máquina. 
-- Caso você tenha esquecido suas credenciais, clique no tutorial a seguir: [tutorial de recuperação de senha].
-- Disponibilização do arquivo (.sql) [link do zip];
+• Before starting, ensure that you have PostgreSQL installed on your machine.
 
+• If you have forgotten your credentials, click on the following tutorial: [password recovery tutorial].
 
-## Step 1: Restauração do arquivo
+• Download the (.sql) file: [zip file link].
 
-Setup do PostgreSQL: dentro do ambiente do PostgreSQL, verifique a versão do seu aplicativo. Você pode verificar de diversas formas, a mais fácil e segura é conectando-se no banco de dados genérico gerado 'postgres', clique com o botão direito em Query Tool, insira suas credenciais (caso não saiba ou tenha perdido, acesse aqui). Com o terminal aberto, digite ```SELECT version();``` a saída do comando incluirá informações seguras sobre a versão do PostgreSQL.
+## Step 1: Restoring the .sql file [database]
 
-Essa etapa é crucial, pois é quando você instala o PostgreSQL em seu sistema, esses utilitários são instalados em um diretório específico. No entanto, se você tiver mais de uma versão do PostgreSQL instalada em seu sistema, pode haver diretórios diferentes para cada versão.
+PostgreSQL Setup: Within the PostgreSQL environment, check the version of your application. There are various ways to do this; the easiest and safest is to connect to the generic database 'postgres'. Right-click on Query Tool, enter your credentials (if you don't know or have lost them, access them here). With the terminal open, type SELECT version();. The output of the command will include secure information about the PostgreSQL version.
 
-Portanto, o PostgreSQL precisa saber onde encontrar esses utilitários para que você possa usá-los. Isso é feito definindo os caminhos binários corretos para cada versão do PostgreSQL. Os caminhos binários são as localizações dos diretórios onde os utilitários estão instalados.
+This step is crucial because when you install PostgreSQL on your system, these utilities are installed in a specific directory. However, if you have more than one version of PostgreSQL installed on your system, there may be different directories for each version.
 
-Ao definir os caminhos binários corretos, você garante que o PostgreSQL use a versão correta dos utilitários para a versão do banco de dados que você está usando. Isso é importante porque cada versão do PostgreSQL pode ter alterações ou melhorias nos utilitários, e usar a versão incorreta pode resultar em comportamentos inesperados ou erros.
+Therefore, PostgreSQL needs to know where to find these utilities so that you can use them. This is done by setting the correct binary paths for each PostgreSQL version. Binary paths are the locations of the directories where the utilities are installed.
 
-## Step 1.1: Ajustando os caminhos binários
+By setting the correct binary paths, you ensure that PostgreSQL uses the correct version of the utilities for the database version you're using. This is important because each PostgreSQL version may have changes or improvements to the utilities, and using the wrong version could result in unexpected behaviors or errors.
 
-No PostgreSQL, vá em Files -> Preferences -> Binary Paths -> e ajuste com o caminho do diretório onde o PostgreSQL, em sua máquina, está instalado.
+## Step 1.1: Reviewing binary paths
 
-Por exemplo, o diretório C:\Program Files\PostgreSQL\16\bin é o diretório onde os utilitários do PostgreSQL 16 estão instalados. Se você tiver instalado o PostgreSQL 16 em seu sistema, você deve definir o caminho binário para esse diretório nas lacunas em aberto na seção do EDB Advanced Server Binary Path e PostgreSQL Binary Path.
+In PostgreSQL, go to Files -> Preferences -> Binary Paths -> and adjust the path to the directory where PostgreSQL is installed on your machine.
 
-Ajuste o caminho de acordo com a versão de seu PostgreSQL.
+For example, the directory C:\Program Files\PostgreSQL\16\bin is where the PostgreSQL 16 utilities are installed. If you have PostgreSQL 16 installed on your system, you should set the binary path to this directory in the open fields under the EDB Advanced Server Binary Path and PostgreSQL Binary Path sections.
 
-## Step 1.2: Migração do código SQL em .txt para o PostgreSQL
+Adjust the path according to your PostgreSQL version.
 
-Com os caminhos binários ajustados, vá no fonte de dados (.sql), abra ela com o editor de texto de sua preferência. Com a abertura do código, dê um CTRL + A para copiar todo o código e um CTRL + C para encaminhá-lo à sua área de transferência. 
+## Step 1.2: Migrating SQL Code from .txt to PostgreSQL
 
-Vá à base de dados 'postgres' ou à alguma de sua preferência, clique com o botão direito acima do nome da base, abra o Query Tool e cole o código copiado em sua área de transferência. Ou seja, migre o código SQL do arquivo-fonte para o terminal.
+With the binary paths adjusted, go to the data source file (.sql) and open it with your preferred text editor. Once the file is open, press CTRL + A to select all the code, and then CTRL + C to copy it to your clipboard.
 
-## Step 2: Execução e Validação
+Next, go to the 'postgres' database or another of your choice, right-click on the database name, open the Query Tool, and paste the copied code from your clipboard. In other words, migrate the SQL code from the source file to the terminal.
 
-Com o botão F5, execute a consulta. Após a run, as tabelas do código (6) foram geradas com sucesso, de maneira lógica e segura, dentro de 'Schemas', na sua base de dados selecionada.
+## Step 2: Execution and Validation
 
-As tabelas geradas dentro da instância public, foram:
-- Movimentos (fato);
-- Cidade_Estado_País (dimensão);
-- Clientes (dimensão);
-- Itens (dimensão);
-- Metas_Prod (dimensão);
-- Representantes (dimensão);
+• Press F5 to execute the query. After the run, the tables from the code (6) will have been successfully generated in a logical and secure manner within the 'Schemas' section of your selected database.
 
-Para visualização e checagem, dentro de 'Schemas' -> public -> Tables -> verifique se as seis tabelas do código SQL foram geradas. Para melhor entendimento dos dados, com o botão direito, clique em View/Edit Data para visualizar o dataset.
+• The tables generated within the public schema are:
 
-## Step 3: Ingestão dos dados no ambiente do MS PowerBI
+• Movements (fact);
+• City_State_Country (dimension);
+• Clients (dimension);
+•Items (dimension);
+• Product_Goals (dimension);
+• Representatives (dimension);
 
-O MS PowerBI, por sua vez, possui conexão integrada com o SGBD do projeto (PostgreSQL). Em Obter Dados, pesquise por PostgreSQL e selecione a opção 'Banco de dados PostgreSQL'. 
+To view and check, navigate to 'Schemas' -> public -> Tables -> and verify that the six SQL code tables have been generated. For a better understanding of the data, right-click on a table and select View/Edit Data to view the dataset.
 
-Como o projeto está sendo executado em ambiente local, na aba de servidor, digite o seu localhost (localhost ou 127.0.0.1) e a base de dados onde as tabelas estão hospedadas.
+## Step 3: Data Ingestion into the MS PowerBI Environment
 
-Para a maioria dos sistema, the default Postgres user is 'postgres' e a sua senha é a respectiva registrada no momento da instalação. Caso não saiba, clique aqui.
+MS PowerBI has an integrated connection with the project's DBMS (PostgreSQL). In Get Data, search for PostgreSQL and select the 'PostgreSQL database' option.
 
-## Step 4: Importação e Data Management
+Since the project is being executed in a local environment, in the server tab, enter your localhost (```localhost``` or ```127.0.0.1```) and the database where the tables are hosted.
 
-Importe todas as tabelas para o PowerQuery, ambiente de gerenciamento de dados nativo do MS PowerBI e clique em Transformar Dados.
+For most systems, the default Postgres user is ```postgres```, and the password is the one you set during installation. If you don't know it, click here.
 
-Caso esteja com o arquivo .pbix pronto, apenas edite as credenciaisi com as instruições do Step 3.
+## Step 4: Import and Data Management
+
+Import all the tables into PowerQuery, the native data management environment of MS PowerBI, and click Transform Data.
+
+If you already have the .pbix file ready, simply update the credentials following the instructions from Step 3.
 
 ## Step 5: Adjusting database errors
 
-Na tabela fato (Movimentos), há erros de registro de datas quando tentamos mesclar os campos separados relacionados à data.
+In the fact table (Movements), there are errors with date records when attempting to merge the separate date-related fields.
 
 
 ## Step 6: Data Modeling 
