@@ -71,6 +71,52 @@ If you already have the .pbix file ready, simply update the credentials followin
 
 In the fact table (Movements), there are errors with date records when attempting to merge the separate date-related fields.
 
+### 5.1 - Creation of a dCalendar for stabilization and universalization of dates for the data model.
+
+• Creation of a dCalendar to stabilize and universalize dates for the data model based on the minimum/maximum year of entry of the database in Postgres up to the maximum recorded date. This allows that, as the data is updated in the DBMS, the dCalendar will also be updated.
+
+### 5.2 - Solving the main date error
+
+The error with dates involves incorrect days in months, such as having the 31st day in months with only 30 days, or the 29th day in February when it only has 28 days.
+
+Since it is not possible to merge the original Month and Year fields and detect the correct date type directly, as this would not allow me to address the issues or identify the erroneous dates, I need to clone these columns for validation.
+
+By creating clones of the Year and Month columns and renaming them to distinguish them from the original columns, I can perform the following steps without affecting the original data:
+
+• Duplicate the Year and Month Columns: Rename the duplicates to differentiate them from the original columns.
+• Merge the Duplicates: Combine the duplicated Year and Month columns to create a new column called MonthYear.
+• Convert to Date Format: Change the MonthYear column to a date format.
+• Add a Column to Identify Days in the Month: Create a new column that calculates the number of days in the month for each MonthYear, using the cloned Month and Year columns. Additionally, add a column for the Month Type to categorize the month based on the number of days.
+• The logic for the Month Type column is as follows:
+
+```
+= Table.AddColumn(DaysInMonth, "Month Type", each 
+    if [DaysInMonth] = 28 then "February - Non-Leap Year" 
+    else if [DaysInMonth] = 29 then "February - Leap Year" 
+    else if [DaysInMonth] = 30 then "Month with 30 Days" 
+    else "Month with 31 Days"
+)
+```
+
+This approach helps identify where corrections are needed without causing errors in the base data.
+
+---
+
+**Finalizing Date Corrections**
+
+After creating the merged `MonthYear` column with the original Month and Year columns, you can use this merged column to retain the `Month Type` information, as it is based on the duplicates that match the originals.
+
+With the `MonthYear` column now populated using the original Month and Year columns, you should avoid converting this new column to a date type. Converting it to a date with incorrect values could disrupt your logic. Instead, keep it as a string and perform a detailed analysis to identify which records have incorrect date entries.
+
+Using the `MonthYear` column created from the duplicated columns, generate two new fixed columns: `FixedMonth` and `FixedYear`.
+
+You can then create a stable and corrected date column by combining the Day (from the `DaysInMonth` column), the Month (from the `MonthYear` column), and the Year (from the `MonthYear` column, again based on the duplicates). 
+
+This method allows you to fix the date accurately, as the erroneous entries typically occurred at the end of the month. By determining the number of days in each month for a given year, you generate the correct day values for the fixed date column.
+
+Once the `Days` column is corrected, you can merge it with the `MonthYear` column generated from the duplicated Month and Year columns. This will result in a clean, stable, and new date column.
+
+I prefer to use the duplicated `MonthYear` columns to validate potential errors against the original columns, but you can remove these duplicates after confirming that all day corrections are accurate. The main focus is ensuring the days are corrected properly.
 
 ## Step 6: Data Modeling 
 
